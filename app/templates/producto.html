@@ -3,5 +3,20 @@
 {% block title %} Titulo {% endblock %}
 
 {% block body %}
-<li>Hola</li>
+
+<form action='/guardar' method="post">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre">
+
+    <label for="correo">Correo:</label>
+    <input type="text" name="correo">
+
+    <label for="categoria">Categoria:</label>
+    <input type="text" name="categoria">
+    <!-- Otros campos del formulario -->
+
+    <button type="submit">Enviar</button>
+</form>
+
 {% endblock %}

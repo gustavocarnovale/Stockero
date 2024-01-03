@@ -18,8 +18,14 @@ def index():
 
     return render_template('index.html', data = data)
 
-@app.route('/producto', methods =['post'])
+@app.route('/producto')
 def producto():
+
+
+    return render_template('producto.html')
+
+@app.route('/guardar', methods =['post'])
+def guardar():
 
     data = {
         "nombre":request.form['nombre'],
@@ -27,7 +33,7 @@ def producto():
         "correo": request.form['correo']
     }
 
-    return render_template('index.html', data = data), fnGuarda(data)
+    return fnGuarda(data)
 
 def query():
 
@@ -35,19 +41,19 @@ def query():
 
     return "Listo!"
 
-#def pag(error):
-#    
-#    return redirect(url_for('index'))
+def pag(error):
+    
+    return redirect(url_for('index'))
 
 def fnGuarda(data):
 
-    db.reference('producto').child(data['categoria'])
-    
+    nodo = db.reference(f'/productos/{data["categoria"]}/{data["nombre"]}')
+    nodo.set(data)
 
-    return render_template('producto.html')
+    return render_template('index.html', data = data)
 
 if __name__ == '__main__':
 
     app.add_url_rule('/query', view_func = query )
-    #app.register_error_handler(404, pag)
+    app.register_error_handler(404, pag)
     app.run(debug=True)
