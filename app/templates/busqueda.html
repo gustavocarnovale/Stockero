@@ -1,22 +1,27 @@
 {% extends './layout.html' %}
 
-{% block title %} Titulo {% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
 
-<form action='/guardar' method="post">
+<h1>Hola</h1>
+
+<form action='/busqueda' method="get">
 
     <label for="nombre">Nombre:</label>
     <input type="text" name="nombre">
-
-    <label for="cantidad">cantidad:</label>
-    <input type="number" name="cantidad">
 
     <label for="linea">linea:</label>
     <input type="text" name="linea">
     <!-- Otros campos del formulario -->
 
     <button type="submit">Enviar</button>
+    <input type="text" name="linea">
+    
 </form>
+
+{% for d in data %}
+{{ d }}
+{% endfor %}
 
 {% endblock %}
