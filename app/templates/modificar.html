@@ -1,0 +1,22 @@
+{% extends './layout.html' %}
+
+{% block title %} Titulo {% endblock %}
+
+{% block body %}
+
+<form action='/modificar' method="post">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre">
+
+    <label for="nueva_cantidad">cantidad:</label>
+    <input type="number" name="nueva_cantidad">
+
+    <label for="linea">linea:</label>
+    <input type="text" name="linea">
+    <!-- Otros campos del formulario -->
+
+    <button type="submit">Enviar</button>
+</form>
+{{data}}
+{% endblock %}

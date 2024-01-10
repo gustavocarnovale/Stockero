@@ -23,45 +23,8 @@ def producto():
 
     return render_template('producto.html')
 
-
-
-
-    
-#----------------------------------------------------------
-@app.route('/busqueda')
-def busqueda():
-    
-    ruta_nodo = f'/productos'
-    nodo_referencia = db.reference(ruta_nodo)
-
-    datos = nodo_referencia.get()
-
-    return render_template('busqueda.html', data = datos)
-
-
-#@app.route('/busca', methods =['get'])
-#def busca():
-#
-#    data = {
-#        "nombre":request.form['nombre'],
-#        "linea": request.form['linea']
-#    }
-#
-#    data_lower = {key: value.lower() if isinstance(value, str) else value for key, value in data.items()}
-#
-#    return fnbusca(data_lower)
-#
-#def fnbusca(data):
-#    resul = data['nombre']
-#    return render_template('busqueda.html'), print(resul)
-#-----------------------------------------------------------
-
-
-
-
 @app.route('/guardar', methods =['post'])
 def guardar():
-
     data = {
         "nombre":request.form['nombre'],
         "linea": request.form['linea'],
@@ -85,22 +48,15 @@ def pag(error):
 def fnGuarda(data):
     
     ruta_nodo = f'/productos/{data["linea"]}/{data["nombre"]}'
-
-    # Obtiene una referencia al nodo en la base de datos
     nodo_referencia = db.reference(ruta_nodo)
 
-    # Verifica si el nodo ya existe
     if nodo_referencia.get():
-        # Si el nodo ya existe, obtiene la cantidad actual
+
         cantidad_actual = nodo_referencia.child('cantidad').get() or 0
-
-        # Suma la nueva cantidad a la cantidad existente
         nueva_cantidad = cantidad_actual + int(data["cantidad"])
-
-        # Actualiza la cantidad en el nodo
         nodo_referencia.update({'cantidad': nueva_cantidad})
+
     else:
-        # Si el nodo no existe, crea uno nuevo con la información completa
         nodo_referencia.set(data)
 
     return render_template('index.html', data=data)
