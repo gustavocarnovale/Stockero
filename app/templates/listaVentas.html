@@ -1,0 +1,20 @@
+{% extends './layout.html' %}
+
+{% block title %}Titulo{% endblock %}
+
+{% block body %}
+
+<ul>
+  {% if ventas %}
+    {% for venta, detalles in ventas.items() %}
+      <label>Cantidad: {{ detalles.cantidad }}</label>
+      <br />
+      <label>Precio: {{ detalles.precio }}</label>
+      <hr />
+    {% endfor %}
+  {% else %}
+    <label>No hubo ventas.</label>
+  {% endif %}
+</ul>
+
+{% endblock %}

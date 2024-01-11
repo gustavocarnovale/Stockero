@@ -1,22 +1,22 @@
-{% extends './layout.html' %}
+{% extends './layout.html' %} {% block title %} Titulo {% endblock %} {% block
+body %}
 
-{% block title %} Titulo {% endblock %}
+<form action="/producto" method="post">
+  <label for="nombre">Nombre:</label>
+  <input type="text" name="nombre" />
 
-{% block body %}
+  <label for="cantidad">Cantidad:</label>
+  <input type="number" name="cantidad" />
 
-<form action='/producto' method="post">
+  <label for="linea">Linea:</label>
+  <input type="text" name="linea" />
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre">
+  <label for="precio">Precio:</label>
+  <input type="text" name="precio" />
 
-    <label for="cantidad">cantidad:</label>
-    <input type="number" name="cantidad">
-
-    <label for="linea">linea:</label>
-    <input type="text" name="linea">
-    <!-- Otros campos del formulario -->
-
-    <button type="submit">Enviar</button>
+  <button type="submit">REGISTAR PRODUCTO</button>
 </form>
 
 {% endblock %}
+
+

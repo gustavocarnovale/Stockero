@@ -1,36 +1,20 @@
-{% extends './layout.html' %}
-
-{% block title %}Titulo{% endblock %}
+{% extends './layout.html' %} 
+{% block title %}Titulo{% endblock %} 
 
 {% block body %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mostrar Datos en Inputs</title>
-</head>
-<body>
-    <h1>Stock</h1>
-
-    {% for linea, productos in datos.items() %}
-        <h2>{{ linea }}</h2>
-        <br>
-            {% for producto, detalles in productos.items() %}
-                <label>Nombre: {{ producto }}</label>
-                <br>
-                <label>Línea: {{ detalles.linea }}</label>
-                <br>
-                <label>Cantidad: {{ detalles.cantidad }}</label>
-                <br>
-                <br>
-                {% endfor %}
-        <br>
-    {% endfor %}
-    
-</body>
-</html>
-
+{% for linea, productos in datos.items() %}
+<h2>{{ linea }}</h2>
+<br />
+{% for producto, detalles in productos.items() %}
+<label>Nombre: {{ producto }}</label>
+<br />
+<label>Línea: {{ detalles.linea }}</label>
+<br />
+<label>Cantidad: {{ detalles.cantidad }}</label>
+<br />
+<br />
+{% endfor %}
+{% endfor %} 
 
 {% endblock %}

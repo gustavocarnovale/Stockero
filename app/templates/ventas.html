@@ -1,0 +1,16 @@
+{% extends './layout.html' %}
+
+{% block title %}Titulo{% endblock %}
+
+{% block body %}
+
+<form action="/ventas" method="GET">
+  <select id="producto" name="producto">
+    {% for producto in productos %}
+      <option value="{{ producto }}">{{ producto }}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Seleccionar">
+</form> 
+
+{% endblock %}
