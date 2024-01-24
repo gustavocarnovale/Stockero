@@ -1,46 +1,54 @@
 from flet import *
 from db import fnCargaProductos, fnCargaLinea
 
-dato = fnCargaProductos()
-salida = ""
+productos = fnCargaProductos()
 
 def index():
-
+    
     def items():
         items = []
-        for i in dato:
+        for i in productos:
             items.append(
                 dropdown.Option(f"{i}"),
             )
         return items
 
-    def dropdown_changed(e):
-        print(f"Dropdown changed to {confDrop.value}")
+    def fnLineaElegida(e):
+        viewStock.controls.clear()
+        viewStock.controls.append(appBarVista)
+        viewStock.controls.append(botonIndexVista)
+        viewStock.controls.append(confDrop)        
+        viewStock.controls.append(titulosCol)        
         salida = fnCargaLinea(confDrop.value)
-        #confCont = Container(
-        #content = Text(f"{salida}"))
-        print(salida)
+        for i, k in salida.items():
+            viewStock.controls.append(DataTable(rows=[DataRow(cells = [DataCell(Text(value=str(i))),])],)),
+            #viewStock.controls.append(Text(value=str(i)))
+            for y, z in k.items():
+                #viewStock.controls.append(Text(value=(f'{y}: {z}')))
+                viewStock.controls.append(DataTable(rows=[DataRow(cells = [DataCell(Text(value=str(y))),DataCell(Text(value=str(z)))])],))
+        viewStock.update()
+        
         return salida
-
-    
-
+  
     confDrop = Dropdown(
-        on_change=dropdown_changed,
+        on_change= fnLineaElegida,
         options=items(),
     )
 
-    #confCont = dropdown_changed(salida) if dropdown_changed(salida) is not None else ""
+    appBarVista = AppBar(title=Text("Stock"), bgcolor=colors.SURFACE_VARIANT)
+    botonIndexVista = ElevatedButton("Index", on_click=lambda e: e.page.go("/index"))
+    titulosCol = DataTable(columns=[DataColumn(Text("Nombre")),DataColumn(Text("Cantidad")),DataColumn(Text("Precio")),])
 
-    return View(
-            "/stock",
-            [
-                AppBar(title=Text("Stock"), bgcolor=colors.SURFACE_VARIANT),
+    viewStock = View(
+                    "/stock",
+                    
+                    controls = [
+                        appBarVista,
+                        botonIndexVista,
+                        confDrop,
+                    ],)
+    
+    return viewStock
 
-                ElevatedButton("Index", on_click=lambda e: e.page.go("/index")),
-                
-                confDrop,
-                
-                #confCont,
-            ],
-        )
 
+            

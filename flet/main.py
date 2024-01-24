@@ -13,7 +13,6 @@ for root, dirs, __ in os.walk(r'./'):
 
 def main(page: Page):
     page.title = "Stockero"
-    
     def route_change(route):    
         page.views.clear()
         for key in _modulelist:
