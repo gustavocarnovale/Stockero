@@ -24,11 +24,3 @@ def fnCargaLinea(datolinea):
         linea = ""
         
     return linea
-
-#def fnCargaDetalle(datolinea, datoDetalle):
-#
-#    nuevaRuta = str(ruta_nodo + datolinea + '/' + datoDetalle)
-#    nuevoNodo = db.reference(nuevaRuta)    
-#    detalle = nuevoNodo.get()
-#    
-#    return detalle

@@ -14,39 +14,48 @@ def index():
         return items
 
     def fnLineaElegida(e):
-        viewStock.controls.clear()
-        viewStock.controls.append(appBarVista)
-        viewStock.controls.append(botonIndexVista)
-        viewStock.controls.append(confDrop)        
-        viewStock.controls.append(titulosCol)        
         salida = fnCargaLinea(confDrop.value)
+        viewStock.controls.clear()
+        titulosCol.rows.clear()
+
+    ###ARMA VISTA###    
+        for objetos in listaObj:
+            viewStock.controls.append(objetos)
+
+    ###CARGA DATOS DE PRODUCTOS EN LA TABLA###
         for i, k in salida.items():
-            viewStock.controls.append(DataTable(rows=[DataRow(cells = [DataCell(Text(value=str(i))),])],)),
-            #viewStock.controls.append(Text(value=str(i)))
             for y, z in k.items():
-                #viewStock.controls.append(Text(value=(f'{y}: {z}')))
-                viewStock.controls.append(DataTable(rows=[DataRow(cells = [DataCell(Text(value=str(y))),DataCell(Text(value=str(z)))])],))
+                if y == "cantidad":
+                    cantidad = z
+                elif y == "precio":
+                    precio = z
+                else:
+                    pass
+             
+            titulosCol.rows.append(DataRow(cells = [DataCell(Text(value=i)),DataCell(Text(value=cantidad)),DataCell(Text(value=(f"$ {precio}")))]),)
         viewStock.update()
         
         return salida
   
-    confDrop = Dropdown(
-        on_change= fnLineaElegida,
-        options=items(),
-    )
-
+    confDrop = Dropdown(on_change= fnLineaElegida,options=items(),)
     appBarVista = AppBar(title=Text("Stock"), bgcolor=colors.SURFACE_VARIANT)
     botonIndexVista = ElevatedButton("Index", on_click=lambda e: e.page.go("/index"))
-    titulosCol = DataTable(columns=[DataColumn(Text("Nombre")),DataColumn(Text("Cantidad")),DataColumn(Text("Precio")),])
+    titulosCol = DataTable(
+            columns=[DataColumn(Text(value=str("producto"))),DataColumn(Text(value=str("cantidad"))),DataColumn(Text("precio")),],
+        )
+    listaObj = (appBarVista,botonIndexVista,confDrop, titulosCol) 
 
     viewStock = View(
                     "/stock",
-                    
+                    horizontal_alignment = CrossAxisAlignment.CENTER,
+                    auto_scroll = True,
+                    scroll = ScrollMode.HIDDEN,
                     controls = [
                         appBarVista,
                         botonIndexVista,
                         confDrop,
-                    ],)
+                    ],
+                )
     
     return viewStock
 

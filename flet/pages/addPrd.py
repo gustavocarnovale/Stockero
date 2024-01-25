@@ -13,9 +13,13 @@ def index():
             print(name)
 
     txt_name = TextField(label="Producto")
+    txt_name = TextField(label="Linea")
+    txt_name = TextField(label="Cantidad")
+    txt_name = TextField(label="Precio")
 
     vista = View(
             "/addPrd",
+            padding = 50,
             controls = [
                 AppBar(title=Text("Agregar producto"), bgcolor=colors.SURFACE_VARIANT),
                 Container(),
