@@ -8,26 +8,12 @@ def index():
         for i, k in lista.items():
             if not k:
                 i.error_text = "Ingreso erroneo"
+                i.autofocus = True
             else:
                 dictGuardad[i.label] = k                 
         
-        print(dictGuardad) if len(dictGuardad)  == 4 else dictGuardad
-        
+        print(dictGuardad) if len(dictGuardad) == 4 else dictGuardad
 
-        #dicEntradas = dict["producto": Nombre,
-        #                   "linea": Linea,
-        #                   "cantidad": Cantidad,
-        #                   "precio": Precio ]
-                  
- #       inNombre.error_text = "Indicar el nombre del producto"
- #       inLinea.error_text = "Indicar la linea del producto"
- #       inCantidad.error_text = "Indicar la cantidad del producto"
- #       inPrecio.error_text = "Indicar el precio del producto"
- #       vista.controls.append(Text(value=str(inNombre.value))) if inNombre.value else inNombre.error_text
- #       vista.controls.append(Text(value=str(inLinea.value))) if inLinea.value else inLinea.error_text 
- #       vista.controls.append(Text(value=int(inCantidad.value))) if inCantidad.value else inCantidad.error_text 
- #       vista.controls.append(Text(value=int(inPrecio.value))) if inPrecio.value else inPrecio.error_text 
-        
         vista.update()
     
     inNombre = TextField(label="Producto", autofocus=True,)
@@ -49,7 +35,6 @@ def index():
                 inLinea,
                 inCantidad,
                 inPrecio,
-                
             ],
         )
 

@@ -6,11 +6,8 @@ productos = fnCargaProductos()
 def index():
     
     def items():
-        items = []
-        for i in productos:
-            items.append(
-                dropdown.Option(f"{i}"),
-            )
+        items = ()
+        items = list(map(lambda x: dropdown.Option(x),productos))
         return items
 
     def fnLineaElegida(e):
@@ -19,8 +16,7 @@ def index():
         titulosCol.rows.clear()
 
     ###ARMA VISTA###    
-        for objetos in listaObj:
-            viewStock.controls.append(objetos)
+        list(map(lambda x: viewStock.controls.append(x),listaObj))
 
     ###CARGA DATOS DE PRODUCTOS EN LA TABLA###
         for i, k in salida.items():
@@ -29,8 +25,6 @@ def index():
                     cantidad = z
                 elif y == "precio":
                     precio = z
-                else:
-                    pass
              
             titulosCol.rows.append(DataRow(cells = [DataCell(Text(value=i)),DataCell(Text(value=cantidad)),DataCell(Text(value=(f"$ {precio}")))]),)
         viewStock.update()
