@@ -1,17 +1,9 @@
 from flet import *
-from db import fnOperacionProducto, fnCargaLinea, fnCargaProductos
+from db import fnLower, fnOperacionProducto
 
 def index():
 
     dictGuardad = {}   
-
-    def items():
-        items = ()
-        items = list(map(lambda x: dropdown.Option(x),fnCargaProductos()))
-        return items
-
-    def fnLineaElegida(e):
-        salida = fnCargaLinea(confDrop.value)
     
     contModal = AlertDialog(
                 modal=True,
@@ -30,11 +22,11 @@ def index():
         vista.controls.clear()
         contModal.open = False
         list(map(lambda x: vista.controls.append(x),listaObj)) ### ARMA VISTA ###  
-        fnOperacionProducto(dictGuardad, op = 1)
+        fnOperacionProducto(dictGuardad, op = 0)
         vista.update()
     
     def btn_click(e):
-        lista = {inNombre: inNombre.value,confDrop: confDrop.value,inCantidad: inCantidad.value,inPrecio: inPrecio.value}
+        lista = {inNombre: inNombre.value,inLinea: inLinea.value,inCantidad: inCantidad.value,inPrecio: inPrecio.value}
 
         for i, k in lista.items():
             if not k:
@@ -53,24 +45,24 @@ def index():
             vista.update()
         return    
    
-    appBarVista = AppBar(title=Text("Agregar producto"),actions = [TextButton("Index", on_click=lambda e: e.page.go("/index")),], bgcolor=colors.SURFACE_VARIANT)
+    appBarVista = AppBar(title=Text("Vender producto"),actions = [TextButton("Index", on_click=lambda e: e.page.go("/index")),], bgcolor=colors.SURFACE_VARIANT)
     inNombre = TextField(label="producto", autofocus=True, width= WindowDragArea)
+    inLinea = TextField(label="linea")
     inCantidad = TextField(label="cantidad", input_filter = NumbersOnlyInputFilter())
     inPrecio = TextField(label="precio",  input_filter = NumbersOnlyInputFilter())
-    btnGuardar = ElevatedButton(text = "Guardar", on_click=btn_click)
-    confDrop = Dropdown(label="linea", on_change= fnLineaElegida,options=items(),) 
+    btnGuardar = ElevatedButton(text = "Vender", on_click=btn_click)
+
+    listaObj = (appBarVista,contModal,inNombre,inLinea,inCantidad,inPrecio,btnGuardar)     
     
     controles = [
                 appBarVista,
                 contModal,
                 inNombre,
-                confDrop,  
+                inLinea,
                 inCantidad,
                 inPrecio,
                 btnGuardar,
                 ]
-
-    listaObj = (appBarVista,contModal,inNombre,confDrop,inCantidad,inPrecio,btnGuardar)    
 
     vista = View(
             "/addPrd",

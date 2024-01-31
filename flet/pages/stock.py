@@ -32,12 +32,11 @@ def index():
         return salida
   
     confDrop = Dropdown(on_change= fnLineaElegida,options=items(),)
-    appBarVista = AppBar(title=Text("Stock"), bgcolor=colors.SURFACE_VARIANT)
-    botonIndexVista = ElevatedButton("Index", on_click=lambda e: e.page.go("/index"))
+    appBarVista = AppBar(title=Text("Agregar producto"),actions = [TextButton("Index", on_click=lambda e: e.page.go("/index")),], bgcolor=colors.SURFACE_VARIANT)
     titulosCol = DataTable(
             columns=[DataColumn(Text(value=str("producto"))),DataColumn(Text(value=str("cantidad"))),DataColumn(Text("precio")),],
         )
-    listaObj = (appBarVista,botonIndexVista,confDrop, titulosCol) 
+    listaObj = (appBarVista,confDrop, titulosCol) 
 
     viewStock = View(
                     "/stock",
@@ -46,7 +45,6 @@ def index():
                     scroll = ScrollMode.HIDDEN,
                     controls = [
                         appBarVista,
-                        botonIndexVista,
                         confDrop,
                     ],
                 )
