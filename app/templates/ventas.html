@@ -5,12 +5,15 @@
 {% block body %}
 
 <form action="/ventas" method="GET">
-  <select id="producto" name="producto">
+  <select class="form-select" aria-label="Default select example" id="producto" name="producto">
     {% for producto in productos %}
       <option value="{{ producto }}">{{ producto }}</option>
     {% endfor %}
   </select>
-  <input type="submit" value="Seleccionar">
+
+  <p class="d-inline-flex gap-1">
+    <button type="submit" class="btn btn-primary" data-bs-toggle="button">Seleccionar</button>
+  </p>
 </form> 
 
 {% endblock %}

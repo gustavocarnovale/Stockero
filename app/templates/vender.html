@@ -1,21 +1,27 @@
-{% extends './layout.html' %} {% block title %} Titulo {% endblock %} {% block
+{% extends './layout.html' %} {% block title %} Vender Productos {% endblock %} {% block
 body %}
 
-<form action="/vender" method="post">
-  <label for="nombre">Nombre:</label>
-  <input type="text" name="nombre" />
+<div class="container-fluid">
+  <div class="mb-3">
+    <form action="/vender" method="post">
 
-  <label for="cantidad_vendida">Cantidad:</label>
-  <input type="number" name="cantidad_vendida" />
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Producto" name="nombre">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Linea" name="linea">
+      <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Cantidad" name="cantidad_vendida">
+      <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Precio" name="precio">
 
-  <label for="linea">Linea:</label>
-  <input type="text" name="linea" />
+      <p class="d-inline-flex gap-1">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="button">Vender</button>
+      </p>
 
-  <label for="precio">Precio:</label>
-  <input type="text" name="precio" />
-  <!-- Otros campos del formulario -->
-
-  <button type="submit">Enviar</button>
-</form>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
+
+
+
+  
+  
+

@@ -1,22 +1,21 @@
 {% extends './layout.html' %} {% block title %} Titulo {% endblock %} {% block
 body %}
 
-<form action="/producto" method="post">
-  <label for="nombre">Nombre:</label>
-  <input type="text" name="nombre" />
+<div class="container-fluid">
+  <div class="mb-3">
+    <form action="/producto" method="post">
 
-  <label for="cantidad">Cantidad:</label>
-  <input type="number" name="cantidad" />
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Producto" name="nombre">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Linea" name="linea">
+      <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Cantidad" name="cantidad_vendida">
+      <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Precio" name="precio">
 
-  <label for="linea">Linea:</label>
-  <input type="text" name="linea" />
+      <p class="d-inline-flex gap-1">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="button">REGISTAR PRODUCTO</button>
+      </p>
 
-  <label for="precio">Precio:</label>
-  <input type="text" name="precio" />
-
-  <button type="submit">REGISTAR PRODUCTO</button>
-</form>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
-
-

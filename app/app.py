@@ -70,6 +70,8 @@ def fnVendeProducto():
     fnRegistraVenta(data_lower)
     return render_template('vender.html')
 
+#######################################################################################################################################
+
 @app.route('/producto')
 def producto():
 

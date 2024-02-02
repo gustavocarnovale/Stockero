@@ -3,18 +3,30 @@
 
 {% block body %}
 
-{% for linea, productos in datos.items() %}
-<h2>{{ linea }}</h2>
-<br />
-{% for producto, detalles in productos.items() %}
-<label>Nombre: {{ producto }}</label>
-<br />
-<label>Línea: {{ detalles.linea }}</label>
-<br />
-<label>Cantidad: {{ detalles.cantidad }}</label>
-<br />
-<br />
-{% endfor %}
-{% endfor %} 
+<div class="container text-center">
+
+    <div class="row">
+      <div class="col">
+      </div>
+        <div class="col">
+            {% for linea, productos in datos.items() %}
+            <h2>{{ linea }}</h2>
+            <br />
+            {% for producto, detalles in productos.items() %}
+            <label>Nombre: {{ producto }}</label>
+            <br />
+            <label>Línea: {{ detalles.linea }}</label>
+            <br />
+            <label>Cantidad: {{ detalles.cantidad }}</label>
+            <br />
+            <br />
+            {% endfor %}
+            {% endfor %} 
+        </div>
+      <div class="col">
+      </div>
+    </div>
+</div>
 
 {% endblock %}
+
