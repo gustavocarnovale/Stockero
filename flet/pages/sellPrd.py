@@ -1,5 +1,5 @@
 from flet import *
-from db import fnLower, fnOperacionProducto
+from db import fnOperacionProducto, fnLower
 
 def index():
 
@@ -19,23 +19,24 @@ def index():
         vista.update()
 
     def fnGuardaProducto(e):
+        datosVenta = fnLower(dictGuardad)        
         vista.controls.clear()
         contModal.open = False
         list(map(lambda x: vista.controls.append(x),listaObj)) ### ARMA VISTA ###  
-        fnOperacionProducto(dictGuardad, op = 0)
+        fnOperacionProducto(datosVenta, op = 0)
         vista.update()
     
     def btn_click(e):
-        lista = {inNombre: inNombre.value,inLinea: inLinea.value,inCantidad: inCantidad.value,inPrecio: inPrecio.value}
+        lista = {inNombre: inNombre.value,inLinea: inLinea.value, inPrecio: int(inPrecio.value), inCantidad: int(inCantidad.value)}
 
         for i, k in lista.items():
             if not k:
                 i.error_text = "Ingreso erroneo"
             else:
-                dictGuardad[i.label] = k.lower()
+                dictGuardad[i.label] = k
             i.value = ""
 
-        if len(dictGuardad)== 4:
+        if len(dictGuardad) == 4:
             Page.dialog = contModal.content = Text(f"{dictGuardad}")
             Page.dialog = contModal.actions.append(TextButton("Correcto", on_click = fnGuardaProducto),)
             Page.dialog = contModal.actions.append(TextButton("No", on_click = fnContModalCerrado),)
@@ -48,8 +49,8 @@ def index():
     appBarVista = AppBar(title=Text("Vender producto"),actions = [TextButton("Index", on_click=lambda e: e.page.go("/index")),], bgcolor=colors.SURFACE_VARIANT)
     inNombre = TextField(label="producto", autofocus=True, width= WindowDragArea)
     inLinea = TextField(label="linea")
+    inPrecio = TextField(label="precio", input_filter = NumbersOnlyInputFilter())
     inCantidad = TextField(label="cantidad", input_filter = NumbersOnlyInputFilter())
-    inPrecio = TextField(label="precio",  input_filter = NumbersOnlyInputFilter())
     btnGuardar = ElevatedButton(text = "Vender", on_click=btn_click)
 
     listaObj = (appBarVista,contModal,inNombre,inLinea,inCantidad,inPrecio,btnGuardar)     

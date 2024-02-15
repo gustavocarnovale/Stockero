@@ -7,6 +7,12 @@ firebase_admin.initialize_app(firebase_sdk,{'databaseURL': 'https://stockero-40e
 ruta_nodo = f'/productos/'
 nodo_referencia = db.reference(ruta_nodo)
 
+def fnLower(data):
+
+    data =  {key: value.lower() if isinstance(value, str) else value for key, value in data.items()}
+
+    return data
+
 def fnCargaProductos():
 
     datos = nodo_referencia.get()
@@ -30,13 +36,13 @@ def fnOperacionProducto(dataLower, op):
     nodo_referencia = db.reference(ruta_nodo)
 
     datosGuardado = {
-        "cantidad":dataLower['cantidad'],
-        "precio": dataLower['precio']
+        "cantidad":dataLower['cantidad'], 
+        "precio": dataLower['precio'] if dataLower['precio'] is not None else 0
     }
     if nodo_referencia.get():
 
-        Cantidad_actual = nodo_referencia.child('cantidad').get() or 0
-        opResta = Cantidad_actual - int(dataLower["cantidad"]) if Cantidad_actual > int(dataLower["cantidad"]) and op == 0 else 0
+        Cantidad_actual = int(nodo_referencia.child('cantidad').get()) or 0
+        opResta = Cantidad_actual - int(dataLower["cantidad"]) if int(Cantidad_actual) > int(dataLower["cantidad"]) and op == 0 else 0
         opSuma = Cantidad_actual + int(dataLower["cantidad"]) if  op == 1 else opResta
         nueva_Cantidad = opSuma
         nodo_referencia.update({'cantidad': nueva_Cantidad})
